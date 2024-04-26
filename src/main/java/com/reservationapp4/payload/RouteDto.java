@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 
 @Data
 public class RouteDto {
-    private Long id;
 
     private String fromLocation;
     private String toLocation;

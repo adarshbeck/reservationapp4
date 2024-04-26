@@ -22,12 +22,20 @@ public class Route {
     private String fromTime;
     private String toTime;
 
-    @OneToOne
-    @JoinColumn(name = "bus_id")
-    private Bus bus;
+    @Column(name = "busId",insertable=false, updatable=false)
+    private Long busId;
 
-    @OneToMany(mappedBy = "route")
-    private List<SubRoute> subRoutes;
+    @OneToOne
+    @JoinColumn(name = "busId")
+    private Bus route;
+
+    public Long getbusId() {
+        return busId;
+    }
+    public Bus setBus(Bus bus) {
+        return bus;
+    }
+
 
     // getters and setters
 

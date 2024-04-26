@@ -25,8 +25,8 @@ public class BusService {
     private SubRouteRepository subRouteRepository;
 
 
-    @Transactional
-    public void addBus(BusDto busDto) {
+
+    public Bus addBus(BusDto busDto) {
         Bus bus = new Bus();
         bus.setBusNumber(busDto.getBusNumber());
         bus.setBusType(busDto.getBusType());
@@ -34,35 +34,7 @@ public class BusService {
         bus.setTotalSeats(busDto.getTotalSeats());
         bus.setAvailableSeats(busDto.getAvailableSeats());
 
-        Route route = new Route();
-        route.setFromLocation(busDto.getRoute().getFromLocation());
-        route.setToLocation(busDto.getRoute().getToLocation());
-        route.setFromDate(busDto.getRoute().getFromDate());
-        route.setToDate(busDto.getRoute().getToDate());
-        route.setTotalDuration(busDto.getRoute().getTotalDuration());
-        route.setFromTime(busDto.getRoute().getFromTime());
-        route.setToTime(busDto.getRoute().getToTime());
-
-        // Save Route entity and associate it with the Bus
-        bus.setRoute(route);
-        busRepository.save(bus);
-
-        if (busDto.getSubRoutes() != null && !busDto.getSubRoutes().isEmpty()) {
-            for (SubRouteDto subRouteDto : busDto.getSubRoutes()) {
-                SubRoute subRoute = new SubRoute();
-                subRoute.setFromLocation(subRouteDto.getFromLocation());
-                subRoute.setToLocation(subRouteDto.getToLocation());
-                subRoute.setTotalDuration(subRouteDto.getTotalDuration());
-                subRoute.setFromTime(subRouteDto.getFromTime());
-                subRoute.setToTime(subRouteDto.getToTime());
-
-                subRoute.setRoute(route);
-
-
-                subRouteRepository.save(subRoute);
-            }
-
-
-        }
+        Bus savedBus = busRepository.save(bus);
+ return savedBus;
     }
     }

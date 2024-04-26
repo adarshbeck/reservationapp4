@@ -22,7 +22,7 @@ public class Bus {
     private int totalSeats;
     private int availableSeats;
 
-    @OneToOne(mappedBy = "bus")
+    @OneToOne(mappedBy = "route")
     private Route route;
 
     // getters and setters
